@@ -1,23 +1,41 @@
 input_file = open("input.txt").read()
-directions: list[str] = input_file.split("")
+directions: list[str] = [direction for direction in input_file]
 
-all_coordinates: list[list[int]] = [[0, 0]]
-coordinate: list[int] = [0, 0]
-
-total_houses: int = 1
-
-for move in directions:
-    if move == "^":
-        coordinate = [coordinate[0], coordinate[1] + 1]
-    if move == ">":
-        coordinate = [coordinate[0] + 1, coordinate[1]]
-    if move == "v":
-        coordinate = [coordinate[0], coordinate[1] - 1]
-    if move == "<":
-        coordinate = [coordinate[0] - 1, coordinate[1]]
+def calculate_houses(day: int = 1):
     
-    if not (coordinate in all_coordinates):
-        all_coordinates.append(coordinate)
-        total_houses += 1
+    current_coordinates: dict[str: list[list[int]]] = {
+        "actual_santa": [0, 0],
+        "robot_santa": [0, 0]
+    }
 
-print(total_houses)
+    all_coordinates: list[list[int]] = [[0, 0]]
+
+    santa = "actual_santa"
+
+    total_houses: int = 1
+
+    for move in directions:
+
+        if move == "^":
+            current_coordinates[santa] = [current_coordinates[santa][0], current_coordinates[santa][1] + 1]
+        if move == ">":
+            current_coordinates[santa] = [current_coordinates[santa][0] + 1, current_coordinates[santa][1]]
+        if move == "v":
+            current_coordinates[santa] = [current_coordinates[santa][0], current_coordinates[santa][1] - 1]
+        if move == "<":
+            current_coordinates[santa] = [current_coordinates[santa][0] - 1, current_coordinates[santa][1]]
+        
+        if not (current_coordinates[santa] in all_coordinates):
+            all_coordinates.append(current_coordinates[santa])
+            total_houses += 1
+
+        if day == 2:
+            if santa == "actual_santa":
+                santa = "robot_santa"
+            elif santa == "robot_santa":
+                santa = "actual_santa"
+
+    print(total_houses)
+
+calculate_houses(1)
+calculate_houses(2)
