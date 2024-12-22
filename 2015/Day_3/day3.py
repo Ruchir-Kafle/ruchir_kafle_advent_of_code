@@ -1,7 +1,7 @@
 input_file = open("input.txt").read()
 directions: list[str] = [direction for direction in input_file]
 
-def calculate_houses(day: int = 1):
+def calculate_houses(part: int = 1):
     
     current_coordinates: dict[str: list[list[int]]] = {
         "actual_santa": [0, 0],
@@ -29,7 +29,7 @@ def calculate_houses(day: int = 1):
             all_coordinates.append(current_coordinates[santa])
             total_houses += 1
 
-        if day == 2:
+        if part == 2:
             if santa == "actual_santa":
                 santa = "robot_santa"
             elif santa == "robot_santa":
