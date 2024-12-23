@@ -1,10 +1,15 @@
 input_file: str = open("input.txt").read()
-reports: list[str] = input_file.split("\n")
+reports: list[str] = list(map(lambda report: report.split(" "), input_file.split("\n")))
 
-def map_into(report):
-    return report.split(" ")
-
-reports = list(map(map_into, reports))
+def filter_through(difference):
+    increasing = (difference > 0)
+    if abs(difference) > 0 and abs(difference) < 4:
+        if increasing:
+            return 1
+        else:
+            return -1
+                    
+    return 0
 
 def find_safe_reports(part: int = 1):
     safe_reports: int = 0
@@ -19,13 +24,12 @@ def find_safe_reports(part: int = 1):
                     difference_list.append(int(level) - previous_level)
                 
                 previous_level = int(level)
-
+    
         if difference_list:
-            increasing = (difference_list[0] > 0)
-            for difference in difference_list:
-                if abs(difference) > 0 and abs(difference) < 4:
-                    if (difference > 0) == increasing:
-                        pass
+            filtered_list: list[bool] = map(filter_through, difference_list)
+
+            if len(set(list(filtered_list))) == 1:
+                safe_reports += 1
 
     print(safe_reports)
 
