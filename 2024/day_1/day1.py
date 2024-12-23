@@ -22,7 +22,7 @@ def location_probability(part: int = 1):
             distance: int = abs(left_list[index] - right_list[index])
             total_distance += distance
 
-        print(total_distance)
+        return(total_distance)
 
     elif part == 2:
         similarity_score: int = 0
@@ -31,7 +31,7 @@ def location_probability(part: int = 1):
             right_list_appearances: int = right_list.count(location_id)            
             similarity_score += location_id * right_list_appearances
 
-        print(similarity_score)
+        return(similarity_score)
 
-location_probability(1)
-location_probability(2)
+print(location_probability(1))
+print(location_probability(2))

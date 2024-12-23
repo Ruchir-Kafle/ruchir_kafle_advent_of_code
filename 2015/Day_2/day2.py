@@ -51,7 +51,7 @@ def calculate_material(part: int = 1):
 
                 total_material += present_ribbon_perimeter + present_cubic_volume
 
-    print(total_material)
+    return(total_material)
 
-calculate_material(1)
-calculate_material(2)
+print(calculate_material(1))
+print(calculate_material(2))

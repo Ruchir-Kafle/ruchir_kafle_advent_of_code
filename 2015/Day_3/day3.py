@@ -35,7 +35,7 @@ def calculate_houses(part: int = 1):
             elif santa == "robot_santa":
                 santa = "actual_santa"
 
-    print(total_houses)
+    return(total_houses)
 
-calculate_houses(1)
-calculate_houses(2)
+print(calculate_houses(1))
+print(calculate_houses(2))
